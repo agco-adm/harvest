@@ -22,6 +22,10 @@ function createApp(options) {
             owner: 'person'
         })
 
+        .resource('car', {
+            name : String
+        })
+
         .resource('foobar', {
             foo: String
         })

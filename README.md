@@ -15,6 +15,7 @@ Pluggable with the [agco-adm JSON-API search](https://github.com/agco-adm/json-a
 - [Sorting](http://jsonapi.org/format/#fetching-sorting)
 - [CRUD](http://jsonapi.org/format/#crud)
 - [Errors](http://jsonapi.org/format/#errors)
+- [UUIDs](http://jsonapi.org/format/#crud-creating-client-ids)
 
 ### Other Features 
 
@@ -26,7 +27,6 @@ Pluggable with the [agco-adm JSON-API search](https://github.com/agco-adm/json-a
 - Extended filter operators : lt, gt, lte, gte
 - Mongodb change events - oplog integration 
 - External links
-- UUIDs 
 - [Patch](http://jsonapi.org/format/#patch) fully supported
 - [Creating](http://jsonapi.org/format/#crud-creating-multiple-resources) and [Updating multiple resources](http://jsonapi.org/format/#crud-updating-multiple-resources)
 
