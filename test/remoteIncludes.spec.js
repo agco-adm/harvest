@@ -28,7 +28,7 @@ describe('remote link', function () {
         before(function () {
 
             var that = this;
-            that.timeout(100000);
+            this.timeout(30000);
 
 
             that.harvesterApp1 =

@@ -13,7 +13,7 @@ describe('EventSource implementation for resource changes', function () {
 
     var harvesterApp;
     describe('Server Sent Events', function () {
-        this.timeout(100000);
+        this.timeout(30000);
         var lastEventId;
 
         before(function () {

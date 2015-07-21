@@ -47,7 +47,7 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
         before(function (done) {
 
             var that = this;
-            that.timeout(100000);
+            that.timeout(30000);
 
             harvesterApp = harvester(harvesterOptions).resource('post', {
                         title: String
@@ -100,7 +100,7 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
 
         beforeEach(function (done) {
             var that = this;
-            that.timeout(100000);
+            that.timeout(30000);
 
             createReportResponseDfd = RSVP.defer();
             createReportPromise = createReportResponseDfd.promise;
@@ -142,7 +142,7 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
             it('should skip as there is only a change handler fn defined on delete', function (done) {
 
                 var that = this;
-                that.timeout(100000);
+                that.timeout(30000);
 
                 that.eventsReader.skip = function (dfd, doc) {
                     if (doc.ns === 'testDB.posts') {
@@ -204,7 +204,7 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
 
     function test(done, mockReports) {
         var that = this;
-        that.timeout(100000);
+        that.timeout(30000);
 
         mockReports();
 
