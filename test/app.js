@@ -11,6 +11,7 @@ var config = require('./config.js');
 function configureApp(harvesterApp) {
     harvesterApp.resource('person', {
         name: Joi.string().required().description('name'),
+        nickname: Joi.string().description('nickname'),
         appearances: Joi.number().required().description('appearances'),
         links: {
             pets: ['pet'],
@@ -82,6 +83,11 @@ function configureApp(harvesterApp) {
         name: Joi.string().description('name')
     })
     .readOnly()
+
+    .resource('restrict', {
+        name: Joi.string().description('name')
+    })
+    .restricted()
 
     .resource('immutable', {
         name: Joi.string().description('name')

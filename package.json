@@ -1,7 +1,7 @@
 {
   "name": "harvesterjs",
   "description": "a library which makes it easy to construct a JSON-API compliant REST API (http://jsonapi.org/) with Nodejs and Mongodb",
-  "version": "2.3.9",
+  "version": "2.3.11",
   "license": "MIT",
   "author": {
     "name": "Kristof Sajdak",
@@ -28,6 +28,7 @@
     "debug": "^2.1.1",
     "express": "~4.6.1",
     "highland": "^2.5.1",
+    "http-as-promised": "^1.1.0",
     "i": "~0.3.2",
     "joi": "^6.4.3",
     "lodash": "~3.7.0",
@@ -46,7 +47,6 @@
     "chai": "^1.10.0",
     "chai-http": "^1.0.0",
     "coveralls": "^2.11.2",
-    "http-as-promised": "^0.1.0",
     "istanbul": "^0.3.7",
     "mocha": "~1.20.1",
     "mocha-lcov-reporter": "0.0.2",
@@ -54,6 +54,7 @@
     "profanity-util": "0.0.2",
     "request-debug": "^0.1.1",
     "should": "~4.0.4",
+    "sinon": "^1.17.6",
     "sleep": "^1.2.0",
     "supertest": "~0.13.0"
   },
