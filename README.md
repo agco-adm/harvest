@@ -39,7 +39,7 @@ Documentation is a pretty sparse right now, however when the dust settles a bit 
 * [UUIDs](https://github.com/agco/harvesterjs/issues/24)
 
 ### References
-This project is a fork of [fortune.js](http://fortunejs.com). Decision to fork was driven by the a) desire to keep as JSONAPI compliant as possible and b) the simplification and power derived from focusing exclusively on mongoDB as the data back-end.
+This project is a fork of [fortune.js](http://fortune.js.org). Decision to fork was driven by the a) desire to keep as JSONAPI compliant as possible and b) the simplification and power derived from focusing exclusively on mongoDB as the data back-end.
 
 [![NPM](https://nodei.co/npm/harvesterjs.png)](https://nodei.co/npm/harvesterjs/)
  
