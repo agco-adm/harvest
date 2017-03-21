@@ -2,6 +2,50 @@
   "name": "harvesterjs",
   "version": "2.4.0",
   "dependencies": {
+    "agco-logger": {
+      "version": "1.0.0",
+      "from": "git+https://github.com/agco/agco-logger.git#c14fba9712968a0509bbf2c69c33a167a6cc1b07",
+      "resolved": "git+https://github.com/agco/agco-logger.git#c14fba9712968a0509bbf2c69c33a167a6cc1b07",
+      "dependencies": {
+        "winston": {
+          "version": "2.3.1",
+          "from": "winston@>=2.2.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/winston/-/winston-2.3.1.tgz",
+          "dependencies": {
+            "async": {
+              "version": "1.0.0",
+              "from": "async@>=1.0.0 <1.1.0",
+              "resolved": "https://registry.npmjs.org/async/-/async-1.0.0.tgz"
+            },
+            "colors": {
+              "version": "1.0.3",
+              "from": "colors@>=1.0.0 <1.1.0",
+              "resolved": "https://registry.npmjs.org/colors/-/colors-1.0.3.tgz"
+            },
+            "cycle": {
+              "version": "1.0.3",
+              "from": "cycle@>=1.0.0 <1.1.0",
+              "resolved": "https://registry.npmjs.org/cycle/-/cycle-1.0.3.tgz"
+            },
+            "eyes": {
+              "version": "0.1.8",
+              "from": "eyes@>=0.1.0 <0.2.0",
+              "resolved": "https://registry.npmjs.org/eyes/-/eyes-0.1.8.tgz"
+            },
+            "isstream": {
+              "version": "0.1.2",
+              "from": "isstream@>=0.1.0 <0.2.0",
+              "resolved": "https://registry.npmjs.org/isstream/-/isstream-0.1.2.tgz"
+            },
+            "stack-trace": {
+              "version": "0.0.9",
+              "from": "stack-trace@>=0.0.0 <0.1.0",
+              "resolved": "https://registry.npmjs.org/stack-trace/-/stack-trace-0.0.9.tgz"
+            }
+          }
+        }
+      }
+    },
     "bluebird": {
       "version": "2.10.2",
       "from": "https://registry.npmjs.org/bluebird/-/bluebird-2.10.2.tgz",
@@ -58,7 +102,7 @@
     },
     "debounce-promise": {
       "version": "3.0.1",
-      "from": "debounce-promise@*",
+      "from": "https://registry.npmjs.org/debounce-promise/-/debounce-promise-3.0.1.tgz",
       "resolved": "https://registry.npmjs.org/debounce-promise/-/debounce-promise-3.0.1.tgz"
     },
     "debug": {
