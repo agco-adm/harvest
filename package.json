@@ -25,6 +25,7 @@
   "dependencies": {
     "bluebird": "^2.9.27",
     "body-parser": "~1.4.3",
+    "debounce-promise": "^3.0.1",
     "debug": "^2.1.1",
     "express": "~4.6.1",
     "highland": "^2.5.1",
