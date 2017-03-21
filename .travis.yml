@@ -4,6 +4,12 @@ node_js:
 env:
   - DEBUG=events-reader MONGODB_URL=mongodb://127.0.0.1:27017/test OPLOG_MONGODB_URL=mongodb://127.0.0.1:27017/local
   - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
 before_script:
   - mongo --version
   - mkdir -p db/test
