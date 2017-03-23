@@ -1,8 +1,9 @@
-var expect = require('chai').expect;
-var Joi = require('joi');
-var sinon = require('sinon');
-var checkpointWriter = require('../lib/checkpoint-writer');
-var Promise = require('bluebird');
+'use strict'
+const expect = require('chai').expect;
+const Joi = require('joi');
+const sinon = require('sinon');
+const checkpointWriter = require('../lib/checkpoint-writer');
+const Promise = require('bluebird');
 
 describe('checkpoint writer', function () {
 
