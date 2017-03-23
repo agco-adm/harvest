@@ -32,9 +32,9 @@ describe('checkpoint writer', function () {
     });
 
     it('should clean last doc and checkpoint after handled', done => {
-      clock.tick(100);
+      clock.tick(1);
       expect(harvestApp.adapter.update.callCount).to.be.eql(1);
-      clock.tick(100);
+      clock.tick(1);
       expect(checkpointWriter.getLastDoc()).to.be.null;
       expect(checkpointWriter.getLastCheckpointId()).to.be.null;
       expect(harvestApp.adapter.update.calledOnce).to.be.true;
@@ -43,11 +43,11 @@ describe('checkpoint writer', function () {
     });
 
     it('should write a checkpoint in a given interval', done => {
-      clock.tick(100);
+      clock.tick(1);
       expect(harvestApp.adapter.update.callCount).to.be.eql(1);
 
       checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
-      clock.tick(100);
+      clock.tick(1);
       expect(harvestApp.adapter.update.callCount).to.be.eql(2);
 
       done();
