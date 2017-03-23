@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var checkpointWriter = require('../lib/checkpoint-writer');
 var Promise = require('bluebird');
 
-describe.only('checkpoint writer', function () {
+describe('checkpoint writer', function () {
 
   describe('timeout', function () {
     const harvestApp = {
