@@ -54,6 +54,17 @@ describe('checkpoint writer', function () {
 
         done();
       });
+
+      it('should debounce excessive checkpoint update function calls', done => {
+        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        clock.tick(1);
+        expect(harvestApp.adapter.update.callCount).to.be.eql(1);
+
+        done();
+      });
     });
 
     context('when passing the option eventsReaderDebounceWait', () => {
