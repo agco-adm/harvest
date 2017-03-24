@@ -21,7 +21,7 @@ describe('checkpoint writer', function () {
     beforeEach(() => {
       clock = sinon.useFakeTimers();
       sinon.stub(harvestApp.adapter, 'update');
-      harvestApp.adapter.update.returns(new Promise.resolve());
+      harvestApp.adapter.update.returns(new Promise.resolve(fakeDoc));
       checkpointWriter.startWriterLoop(harvestApp);
       checkpointWriter.setWriterLoopStopped(true);
       checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
