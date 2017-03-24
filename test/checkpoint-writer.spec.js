@@ -36,8 +36,8 @@ describe('checkpoint writer', function () {
       clock.tick(1);
       expect(harvestApp.adapter.update.callCount).to.be.eql(1);
       clock.tick(1);
-      expect(checkpointWriter.getLastDoc()).to.be.null;
-      expect(checkpointWriter.getLastCheckpointId()).to.be.null;
+      expect(checkpointWriter.getLastDoc()).to.be.undefined;
+      expect(checkpointWriter.getLastCheckpointId()).to.be.undefined;
       expect(harvestApp.adapter.update.calledOnce).to.be.true;
 
       done();
