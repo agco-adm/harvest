@@ -15,7 +15,7 @@ describe('checkpoint writer', function () {
         }
       };
       const fakeDoc = {ts: 1};
-      const checkpointEvent = checkpointWriter.checkpointEvent;
+      const checkpointEventEmitter = checkpointWriter.checkpointEventEmitter;
 
       let clock;
 
@@ -25,7 +25,7 @@ describe('checkpoint writer', function () {
         harvestApp.adapter.update.returns(new Promise.resolve(fakeDoc));
         checkpointWriter.startWriterLoop(harvestApp);
         checkpointWriter.setWriterLoopStopped(true);
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
       });
 
       afterEach(() => {
@@ -48,7 +48,7 @@ describe('checkpoint writer', function () {
         clock.tick(1);
         expect(harvestApp.adapter.update.callCount).to.be.eql(1);
 
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
         clock.tick(1);
         expect(harvestApp.adapter.update.callCount).to.be.eql(2);
 
@@ -56,10 +56,10 @@ describe('checkpoint writer', function () {
       });
 
       it('should debounce excessive checkpoint update function calls', done => {
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
         clock.tick(1);
         expect(harvestApp.adapter.update.callCount).to.be.eql(1);
 
@@ -78,7 +78,7 @@ describe('checkpoint writer', function () {
         }
       };
       const fakeDoc = {ts: 1};
-      const checkpointEvent = checkpointWriter.checkpointEvent;
+      const checkpointEventEmitter = checkpointWriter.checkpointEventEmitter;
 
       let clock;
 
@@ -88,7 +88,7 @@ describe('checkpoint writer', function () {
         harvestApp.adapter.update.returns(new Promise.resolve(fakeDoc));
         checkpointWriter.startWriterLoop(harvestApp);
         checkpointWriter.setWriterLoopStopped(true);
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
       });
 
       afterEach(() => {
@@ -100,7 +100,7 @@ describe('checkpoint writer', function () {
         clock.tick(eventsReaderDebounceDelay);
         expect(harvestApp.adapter.update.callCount).to.be.eql(1);
 
-        checkpointEvent.emit('newCheckpoint', 1, fakeDoc);
+        checkpointEventEmitter.emit('newCheckpoint', 1, fakeDoc);
         clock.tick(eventsReaderDebounceDelay);
         expect(harvestApp.adapter.update.callCount).to.be.eql(2);
 
