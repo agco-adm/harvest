@@ -2,7 +2,7 @@
 const expect = require('chai').expect;
 const Joi = require('joi');
 const sinon = require('sinon');
-const checkpointWriter = require('../lib/checkpoint-writer');
+const checkpointWriter = require('../lib/events-reader-checkpoint-writer');
 const Promise = require('bluebird');
 
 describe('checkpoint writer', function () {
