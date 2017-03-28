@@ -1,10 +1,14 @@
-version: '3'
+version: '2'
 services:
   test:
     build: .
     command: bash -c "sleep 20 && npm test"
     depends_on:
       - db
+    environment:
+      - DEBUG=events-reader
+      - MONGODB_URL=mongodb://db:27017/test
+      - OPLOG_MONGODB_URL=mongodb://db:27017/local
   db:
     image: mongo:2.4.14
     command: mongod --replSet rs0 --oplogSize 20 --noprealloc  --smallfiles --nojournal
