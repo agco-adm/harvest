@@ -19,7 +19,7 @@
     "url": "https://github.com/agco/harvesterjs"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha && npm run lint",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
