@@ -9,13 +9,7 @@ let harvester = require('../lib/harvester');
 // todo we need a better strategy to stand up test harvesterjs instances
 // listening on hard coded free ports and duplicating harvesterjs options is not very robust and DRY
 
-let harvesterOptions = {
-  adapter: 'mongodb',
-  connectionString: process.env.MONGODB_URL || 'mongodb://db:27017/testDB',
-  db: 'testDB',
-  inflect: true,
-  oplogConnectionString: (process.env.OPLOG_MONGODB_URL || 'mongodb://db:27017/local') + '?slaveOk=true'
-};
+const harvesterOptions = require('./config').harvester.options;
 
 describe('remote link', function() {
 
