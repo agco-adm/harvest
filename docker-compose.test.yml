@@ -15,5 +15,3 @@ services:
   initReplicaset:
     image: mongo:2.4.14
     command: bash -c "sleep 3 && mongo admin --host db:27017 --eval 'printjson(rs.initiate());'"
-    links:
-      - db
