@@ -6,7 +6,7 @@ services:
     depends_on:
       - db
     environment:
-      - DEBUG=events-reader
+      - DEBUG=
       - MONGODB_URL=mongodb://db:27017/test
       - OPLOG_MONGODB_URL=mongodb://db:27017/local
   db:

@@ -10,11 +10,11 @@ let harvester = require('../lib/harvester');
 // listening on hard coded free ports and duplicating harvesterjs options is not very robust and DRY
 
 let harvesterOptions = {
-    adapter: 'mongodb',
-    connectionString: process.env.MONGODB_URL || 'mongodb://db:27017/testDB',
-    db: 'testDB',
-    inflect: true,
-    oplogConnectionString: (process.env.OPLOG_MONGODB_URL || 'mongodb://db:27017/local') + '?slaveOk=true'
+  adapter: 'mongodb',
+  connectionString: process.env.MONGODB_URL || 'mongodb://db:27017/testDB',
+  db: 'testDB',
+  inflect: true,
+  oplogConnectionString: (process.env.OPLOG_MONGODB_URL || 'mongodb://db:27017/local') + '?slaveOk=true'
 };
 
 describe('remote link', function() {
