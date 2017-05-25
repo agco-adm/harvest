@@ -10,28 +10,23 @@ let Joi = require('joi');
 let config = require('./config.js');
 
 function configureApp(harvesterApp) {
-  harvesterApp.resource('person', {
-    name: Joi.string().required().description('name'),
-    nickname: Joi.string().description('nickname'),
-    appearances: Joi.number().required().description('appearances'),
-    links: {
-      pets: ['pet'],
-      soulmate: {ref: 'person', inverse: 'soulmate'},
-      lovers: [
-                {ref: 'person', inverse: 'lovers'},
-      ],
-    },
-  })
-
+  harvesterApp
+    .resource('person', {
+      name: Joi.string().required().description('name'),
+      nickname: Joi.string().description('nickname'),
+      appearances: Joi.number().required().description('appearances'),
+      links: {
+        pets: ['pet'],
+        soulmate: { ref: 'person', inverse: 'soulmate' },
+        lovers: [{ ref: 'person', inverse: 'lovers' }],
+      },
+    })
     .resource('vehicle', {
       name: Joi.string(),
       links: {
-        owners: [
-                {ref: 'person'},
-        ],
+        owners: [{ ref: 'person' }],
       },
     })
-
     .resource('pet', {
       name: Joi.string().required().description('name'),
       appearances: Joi.number().required().description('appearances'),
@@ -41,62 +36,58 @@ function configureApp(harvesterApp) {
       },
       adopted: Joi.date(),
     })
-
     .resource('collar', {
       links: {
         collarOwner: 'pet',
       },
     })
-
-    .resource('cat', {
+    .resource(
+      'cat',
+    {
       name: Joi.string().required().description('name'),
       hasToy: Joi.boolean().required().description('hasToy'),
       numToys: Joi.number().required().description('numToys'),
-    }, {namespace: 'animals'})
-
+    },
+      { namespace: 'animals' }
+    )
     .resource('foobar', {
       foo: Joi.string().required().description('name'),
     })
-
     .before(function() {
       var foobar = this;
 
       if (foobar.foo && foobar.foo === 'bar') {
-            // promise
+        // promise
         return new Promise(function(resolve, reject) {
-          reject(new JSONAPI_Error({
-            status: 400,
-            detail: 'Foo was bar',
-          }));
+          reject(
+            new JSONAPI_Error({
+              status: 400,
+              detail: 'Foo was bar',
+            })
+          );
         });
-      }
-      else if (foobar.foo && foobar.foo === 'baz') {
-            // non-promise
+      } else if (foobar.foo && foobar.foo === 'baz') {
+        // non-promise
         throw new JSONAPI_Error({
           status: 400,
           detail: 'Foo was baz',
         });
-      }
-      else {
+      } else {
         return foobar;
       }
     })
-
     .resource('readers', {
       name: Joi.string().description('name'),
     })
     .readOnly()
-
     .resource('restrict', {
       name: Joi.string().description('name'),
     })
     .restricted()
-
     .resource('immutable', {
       name: Joi.string().description('name'),
     })
     .immutable()
-
     .resource('object', {
       foo: Joi.object().required().keys({
         bar: Joi.string(),
@@ -112,7 +103,7 @@ function configureApp(harvesterApp) {
   });
 
   harvesterApp.router.get('/json-errors-error', function(req, res, next) {
-    next(new JSONAPI_Error({status: 400, detail: 'Bar was not foo'}));
+    next(new JSONAPI_Error({ status: 400, detail: 'Bar was not foo' }));
   });
 
   return harvesterApp;

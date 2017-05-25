@@ -8,9 +8,8 @@ let mongodbHostname;
 // use this value to derive the hostname for the Mongodb connection params
 if (dockerHostURL) {
   mongodbHostname = require('url').parse(dockerHostURL).hostname;
-}
-else {
-    // fallback if Mongodb is being run from the host machine
+} else {
+  // fallback if Mongodb is being run from the host machine
   mongodbHostname = '127.0.0.1';
 }
 
@@ -21,38 +20,39 @@ let apiHost = 'http://localhost:' + apiPort;
 harvester({
   adapter: 'mongodb',
   connectionString: 'mongodb://' + mongodbHostname + ':27017/test',
-  oplogConnectionString: 'mongodb://' + mongodbHostname + ':27017/local'
+  oplogConnectionString: 'mongodb://' + mongodbHostname + ':27017/local',
 })
-    .resource('artists', {
-      name: String,
-    })
-    .listen(apiPort);
+  .resource('artists', {
+    name: String,
+  })
+  .listen(apiPort);
 
 // subscribe to the artists change events stream (SSE)
 let ess = require('agco-event-source-stream');
 
-ess(apiHost + '/artists/changes/stream')
-    .on('data', function(data) {
-      console.log('recevied artist change event', data);
-    });
+ess(apiHost + '/artists/changes/stream').on('data', function(data) {
+  console.log('recevied artist change event', data);
+});
 
 // add some data
 let $http = require('http-as-promised');
 
 let sepultura = {
-  artists: [{
-    name: 'Sepultura'
-  }],
+  artists: [
+    {
+      name: 'Sepultura',
+    },
+  ],
 };
 
 // wait a bit for the event stream to open before posting the artist
 setTimeout(function() {
-  $http.post(apiHost + '/artists', {json: sepultura})
-        .spread(function(response, body) {
-          console.log(body);
-        })
-        .catch(function(error) {
-          console.error(error);
-        });
+  $http
+    .post(apiHost + '/artists', { json: sepultura })
+    .spread(function(response, body) {
+      console.log(body);
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
 }, 2000);
-

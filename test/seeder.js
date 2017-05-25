@@ -19,26 +19,30 @@ let fixtures = require('./fixtures');
  * @returns {{dropCollectionsAndSeed: Function}} configured seeding service
  */
 module.exports = function(harvesterInstance, baseUrl) {
-
   baseUrl = baseUrl || 'http://localhost:' + config.harvester.port;
 
   function post(key, value) {
     return new Promise(function(resolve, reject) {
       var body = {};
       body[key] = value;
-      request(baseUrl).post('/' + key).send(body).expect('Content-Type', /json/).expect(201).end(function(error, response) {
-        if (error) {
-          reject(error);
-          return;
-        }
-        var resources = JSON.parse(response.text)[key];
-        var ids = {};
-        ids[key] = [];
-        _.forEach(resources, function(resource) {
-          ids[key].push(resource.id);
+      request(baseUrl)
+        .post('/' + key)
+        .send(body)
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .end(function(error, response) {
+          if (error) {
+            reject(error);
+            return;
+          }
+          var resources = JSON.parse(response.text)[key];
+          var ids = {};
+          ids[key] = [];
+          _.forEach(resources, function(resource) {
+            ids[key].push(resource.id);
+          });
+          resolve(ids);
         });
-        resolve(ids);
-      });
     });
   }
 
@@ -49,14 +53,13 @@ module.exports = function(harvesterInstance, baseUrl) {
         collection.drop(function() {
           resolve();
         });
-      }
-      else {
+      } else {
         resolve();
       }
     });
   }
 
-    /**
+  /**
      * Drop collections whose names are specified in vararg manner.
      *
      * @returns {*} array of collection names
@@ -65,7 +68,9 @@ module.exports = function(harvesterInstance, baseUrl) {
     if (arguments.length === 0) {
       throw new Error('Collection names must be specified explicitly');
     }
-    var collectionNames = arguments.length === 0 ? _.keys(fixtures()) : arguments;
+    var collectionNames = arguments.length === 0
+      ? _.keys(fixtures())
+      : arguments;
     var promises = _.map(collectionNames, function(collectionName) {
       return drop(collectionName);
     });
@@ -75,19 +80,22 @@ module.exports = function(harvesterInstance, baseUrl) {
   }
 
   function dropCollectionsAndSeed() {
-    return dropCollections.apply(this, arguments).then(function(collectionNames) {
-      var allFixtures = fixtures();
-      var promises = _.map(collectionNames, function(collectionName) {
-        return post(collectionName, allFixtures[collectionName]);
+    return dropCollections
+      .apply(this, arguments)
+      .then(function(collectionNames) {
+        var allFixtures = fixtures();
+        var promises = _.map(collectionNames, function(collectionName) {
+          return post(collectionName, allFixtures[collectionName]);
+        });
+        return Promise.all(promises);
+      })
+      .then(function(result) {
+        var response = {};
+        _.forEach(result, function(item) {
+          _.extend(response, item);
+        });
+        return response;
       });
-      return Promise.all(promises);
-    }).then(function(result) {
-      var response = {};
-      _.forEach(result, function(item) {
-        _.extend(response, item);
-      });
-      return response;
-    });
   }
 
   function seedCustomFixture(fixture) {

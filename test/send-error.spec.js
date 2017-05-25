@@ -17,7 +17,7 @@ describe('function sendError', function() {
   var res;
   var error;
 
-    // helper functions
+  // helper functions
   function mockFunc() {
     return res;
   }
@@ -35,10 +35,10 @@ describe('function sendError', function() {
   }
 
   beforeEach(function() {
-        // Shortened timeouts as there is a catch in `sendError` that swallows
-        // errors thrown by `should` in the mocked `res` functions. Thus
-        // causing these tests to fail by timeout, which is currently set to
-        // 50 seconds.
+    // Shortened timeouts as there is a catch in `sendError` that swallows
+    // errors thrown by `should` in the mocked `res` functions. Thus
+    // causing these tests to fail by timeout, which is currently set to
+    // 50 seconds.
     this.timeout(100);
     req = {};
     res = {
@@ -49,14 +49,18 @@ describe('function sendError', function() {
     error = new JsonApiError({ status: '400' });
   });
 
-  it('should accept a harvester#jsonapi-error object as it\'s third argument', function(done) {
+  it("should accept a harvester#jsonapi-error object as it's third argument", function(
+    done
+  ) {
     res.send = function(body) {
       standardJsonApiErrorValidation(body);
       done();
     };
     sendError(req, res, error);
   });
-  it('should accept an array of harvester#jsonapi-error objects as it\'s third argument', function(done) {
+  it("should accept an array of harvester#jsonapi-error objects as it's third argument", function(
+    done
+  ) {
     error = [error];
     res.send = function(body) {
       standardJsonApiErrorValidation(body);
@@ -64,7 +68,9 @@ describe('function sendError', function() {
     };
     sendError(req, res, error);
   });
-  it('should accept an array of 3 harvester#jsonapi-error objects as it\'s third argument', function(done) {
+  it("should accept an array of 3 harvester#jsonapi-error objects as it's third argument", function(
+    done
+  ) {
     error = [error, error, error];
     res.send = function(response) {
       var body = standardJsonApiErrorValidation(response);

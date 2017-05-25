@@ -4,16 +4,15 @@ const sinon = require('sinon');
 const checkpointWriter = require('../lib/events-reader-checkpoint-writer');
 const Promise = require('bluebird');
 
-describe('checkpoint writer', function () {
-
-  describe('timeout', function () {
+describe('checkpoint writer', function() {
+  describe('timeout', function() {
     context('when using the default config options', () => {
       const harvestApp = {
         adapter: {
-          update: () => {}
-        }
+          update: () => {},
+        },
       };
-      const fakeDoc = {ts: 1};
+      const fakeDoc = { ts: 1 };
       const checkpointEventEmitter = checkpointWriter.checkpointEventEmitter;
 
       let clock;
@@ -70,13 +69,13 @@ describe('checkpoint writer', function () {
       const eventsReaderDebounceDelay = 1000;
       const harvestApp = {
         adapter: {
-          update: () => {}
+          update: () => {},
         },
         options: {
-          eventsReaderDebounceWait: eventsReaderDebounceDelay
-        }
+          eventsReaderDebounceWait: eventsReaderDebounceDelay,
+        },
       };
-      const fakeDoc = {ts: 1};
+      const fakeDoc = { ts: 1 };
       const checkpointEventEmitter = checkpointWriter.checkpointEventEmitter;
 
       let clock;
@@ -106,7 +105,5 @@ describe('checkpoint writer', function () {
         done();
       });
     });
-
   });
-
 });

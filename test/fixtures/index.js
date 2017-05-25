@@ -4,9 +4,11 @@ let fs = require('fs');
 let path = require('path');
 
 function FixturesSync() {
-  let fixtureList = fs.readdirSync(path.join(__dirname, './')).filter(function(item) {
-    return item !== 'index.js';
-  });
+  let fixtureList = fs
+    .readdirSync(path.join(__dirname, './'))
+    .filter(function(item) {
+      return item !== 'index.js';
+    });
   let fixtures;
 
   if (!fixtures) {
