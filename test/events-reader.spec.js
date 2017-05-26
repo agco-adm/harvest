@@ -176,7 +176,6 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
           const oplog = mongoose.connection.db.collection('oplog.rs');
           const Timestamp = mongoose.mongo.Timestamp;
 
-
           return new Promise(function(resolve, reject) {
             return oplog 
               .find({})
@@ -229,44 +228,6 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
               done();
             })
             .catch(done);
-        });
-      });
-
-      describe('When a new post is added', function() {
-        it('should skip as there is only a change handler fn defined on delete', function(
-          done
-        ) {
-          var that = this;
-          that.timeout(100000);
-
-          that.eventsReader.skip = function(dfd, doc) {
-            // todo fix this
-
-            var regex = new RegExp('.*\\.posts', 'i');
-            if (regex.test(doc.ns)) {
-
-              dfd.resolve();
-              done();
-            }
-          };
-
-          that.chaiExpress
-            .post('/posts')
-            .send({
-              posts: [
-                {
-                  title: 'a simple topic',
-                },
-              ],
-            })
-            .catch(function(err) {
-              console.trace(err);
-              done(err);
-            });
-
-          that.checkpointCreated.then(function() {
-            that.eventsReader.tail();
-          });
         });
       });
 
@@ -399,7 +360,6 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
     that.timeout(100000);
 
     mockReports();
-
 
     that.checkpointCreated.then(function() {
       setTimeout(that.eventsReader.tail.bind(that.eventsReader), 500);
