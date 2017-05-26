@@ -233,6 +233,41 @@ describe('onChange callback, event capture and at-least-once delivery semantics'
       });
 
       describe('When a new post is added', function() {
+        it('should skip as there is only a change handler fn defined on delete', function(
+          done
+        ) {
+          var that = this;
+          that.timeout(100000);
+
+          that.eventsReader.skip = function(dfd, doc) {
+            // todo fix this
+
+            var regex = new RegExp('.*\\.posts', 'i');
+            if (regex.test(doc.ns)) {
+
+              dfd.resolve();
+              done();
+            }
+          };
+
+          that.chaiExpress
+            .post('/posts')
+            .send({
+              posts: [
+                {
+                  title: 'a simple topic',
+                },
+              ],
+            })
+            .catch(function(err) {
+              console.trace(err);
+              done(err);
+            });
+
+          that.checkpointCreated.then(function() {
+            that.eventsReader.tail();
+          });
+        });
       });
 
       describe('When that abuse report API resource responds with a 201 created', function() {
