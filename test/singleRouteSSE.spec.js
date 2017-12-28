@@ -276,5 +276,52 @@ describe('EventSource implementation for resource changes', function() {
         });
       });
     });
+
+    describe('When I delete collection document directly through mongodb adapter', function() {
+      var documentId = '';
+
+      before(function(done) {
+        seeder(harvesterApp, baseUrl)
+          .seedCustomFixture({
+            books: [
+              {
+                title: 'The Bourne Identity',
+                author: 'Robert Ludlum',
+              },
+            ],
+          })
+          .then(function(result) {
+            documentId = result[0].books[0];
+            done();
+          });
+      });
+
+      it('Then SSE should broadcast event with data containing _id of property of deleted document', function(
+        done
+      ) {
+        var expected = {
+          _id: documentId
+        };
+        var counter = 0;
+        var eventSource = ess(baseUrl + '/books/changes/stream', {
+          retry: false,
+        }).on('data', function(response) {
+          var data = JSON.parse(response.data);
+          if (counter === 0) {
+            harvesterApp.adapter.db.collections.books.deleteOne(
+              { _id: documentId }
+            );
+          }
+          if (counter === 1) {
+            expect(data).to.deep.equal(expected);
+          }
+          if (counter === 2) {
+            done();
+            eventSource.destroy();
+          }
+          counter++;
+        });
+      });
+    });
   });
 });
